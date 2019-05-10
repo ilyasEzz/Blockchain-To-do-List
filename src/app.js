@@ -1,5 +1,4 @@
 const loader = document.getElementById("loader");
-const content = document.getElementById("content");
 const account = document.getElementById("account");
 
 App = {
@@ -118,6 +117,12 @@ App = {
     }
   
 
+  },
+
+  createTask: async () =>{
+    const content = document.getElementById("newTask").value;
+    await App.todoList.createTask(content);
+    window.location.reload;
   }
 
   /*setLoading: (bool) =>{

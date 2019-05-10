@@ -11,19 +11,31 @@ contract TodoList {
 // mapping is like hash tables of key/value pairs
     mapping(uint => Task ) public tasks;
 
-    function createTask(string memory _content) public {
-/*  mapping has a dynamic size in other words, 
-    solidity doesn't  know it size automaticly. This is why we need taskCount */
-     taskCount ++;
-
-// create a new Task(id, content, completed) and put it inside the mapping 
-        tasks[taskCount] = Task(taskCount, _content, false);
-    }
+    event TaskCreated(
+        uint id,
+        string content,
+        bool completed
+    );
 
     constructor() public {
         createTask("Learning the Basics of Solidity");
-        createTask("Connecting Solidity with the Front-end ");
+        
     }
+
+    function createTask(string memory _content) public {
+/*  mapping has a dynamic size in other words, 
+    solidity doesn't  know it size automaticly. This is why we need taskCount */
+        taskCount ++;
+
+// create a new Task(id, content, completed) and put it inside the mapping 
+        tasks[taskCount] = Task(taskCount, _content, false);
+
+        emit TaskCreated(taskCount, _content, false);
+
+
+    }
+
+    
 
 
 }
